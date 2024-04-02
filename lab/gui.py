@@ -51,7 +51,7 @@ class Paint:
             "Parabola",
             "B_Splaine",
             "Bezier",
-            "Hermite"
+            "Hermite",
         ]
         self.selected_mode = self.mode[0]
 
@@ -114,14 +114,22 @@ class Paint:
     def click_handler(self, event) -> None:
         try:
             self.draw.append(event)
-            if self.selected_mode in ["B_Splaine", "Bezier", "Hermite"] and len(self.draw) < 4:
+            if (
+                self.selected_mode in ["B_Splaine", "Bezier", "Hermite"]
+                and len(self.draw) < 4
+            ):
                 return
         except AttributeError:
             self.draw = [event]
             return
         if self.selected_mode in ["DDA", "Wu", "Bresenham"]:
             module = import_module("lines." + self.selected_mode)
-        elif self.selected_mode in ["Ellipse", "Circle", "Hyperbola", "Parabola",]:
+        elif self.selected_mode in [
+            "Ellipse",
+            "Circle",
+            "Hyperbola",
+            "Parabola",
+        ]:
             module = import_module("cool_lines." + self.selected_mode)
         else:
             module = import_module("curves." + self.selected_mode)
@@ -135,7 +143,9 @@ class Paint:
             if len(self.draw) == 2:
                 self.points = function(self.draw[0], self.draw[1])
             else:
-                self.points = function(self.draw[0], self.draw[1], self.draw[2], self.draw[3])
+                self.points = function(
+                    self.draw[0], self.draw[1], self.draw[2], self.draw[3]
+                )
         logging.info("Draw in " + self.selected_mode + " Mode")
         if self.selected_mode != "Wu":
             for i in self.points:
