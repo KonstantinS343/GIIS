@@ -195,10 +195,10 @@ class PolygonEditor:
             messagebox.showwarning("Warning", "Invalid point coordinates format. Please enter as 'x, y'.")
             return
 
-        # if self.point_in_polygon((x, y)):
-        #     messagebox.showinfo("Point Check", f"The point ({x}, {y}) is inside the polygon.")
-        # else:
-        #     messagebox.showinfo("Point Check", f"The point ({x}, {y}) is outside the polygon.")
+        if self.point_in_polygon((x, y)):
+            messagebox.showinfo("Point Check", f"The point ({x}, {y}) is inside the polygon.")
+        else:
+            messagebox.showinfo("Point Check", f"The point ({x}, {y}) is outside the polygon.")
         self.canvas.create_oval(x - 2, y - 2, x + 2, y + 2, fill="black")
 
     def point_in_polygon(self, point):
